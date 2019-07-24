@@ -2,4 +2,5 @@
 FAME modules
 * Slack report
 
-Send a HTML report of the scan to slack.
+Send an HTML report of the last scan to the configured Slack channel.
+Preliminary proxy support.

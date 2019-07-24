@@ -29,14 +29,9 @@ class SlackReport(ReportingModule):
 
     config = [
         {
-            'name': 'url',
-            'type': 'str',
-            'description': 'Incoming webhook URL.'
-        },
-        {
             'name': 'channel',
             'type': 'str',
-            'description': 'Slack channel to share the report'
+            'description': 'Slack channel(s) to share the report'
         },
         {
             'name': 'legacy_token',
@@ -46,7 +41,8 @@ class SlackReport(ReportingModule):
         {
             'name': 'fame_base_url',
             'type': 'str',
-            'description': 'Base URL of your FAME instance, as you want it to appear in links.'
+            'default': 'http://localhost:4200',
+            'description': 'Base URL:PORT of your FAME instance, as you want it to appear in links.'
         },
         {
             'name': 'fame_api_key',
@@ -75,19 +71,10 @@ class SlackReport(ReportingModule):
 
     def done(self, analysis):
  
-        ### use localhost
-        fame_local_instance = "http://localhost:4200"
-        url_analysis = "{0}/analyses/{1}".format(fame_local_instance, analysis['_id'])
-        #url_analysis = "{0}/analyses/{1}".format(self.fame_base_url, analysis['_id'])
-
+        url_analysis = "{0}/analyses/{1}".format(self.fame_base_url, analysis['_id'])
+        
         response = requests.get(url_analysis, stream=True, headers={'X-API-KEY': self.fame_api_key})
         response.raise_for_status()
-
-        try:
-            print fame_config.api_key
-        except ModuleExecutionError, e:
-            self.log("error", fame_config.api_key)
-            self.log("debug", fame_config.api_key)
 
         report = {
           'file': ("{0}_report.html".format(analysis['_id']), response.content)
