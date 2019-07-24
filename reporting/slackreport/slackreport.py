@@ -14,10 +14,10 @@ except ImportError:
     HAVE_REQUESTS = False
 
 try:
-    import WeasyPrint
-    HAVE_WeasyPrint = True
+    from weasyprint import HTML, CSS
+    HAVE_WEASYPRINT = True
 except ImportError:
-    HAVE_WeasyPrint = False
+    HAVE_WEASYPRINT = False
 
 try:
     from defang import defang
@@ -73,8 +73,8 @@ class SlackReport(ReportingModule):
             if not HAVE_DEFANG:
                 raise ModuleInitializationError(self, "Missing dependency: defang")
 
-            if not HAVE_WeasyPrint:
-                raise ModuleInitializationError(self, "Missing dependency: WeasyPrint")                
+            if not HAVE_WEASYPRINT:
+                raise ModuleInitializationError(self, "Missing dependency: weasyprint")                
 
             return True
         else:
