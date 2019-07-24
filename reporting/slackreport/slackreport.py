@@ -93,7 +93,7 @@ class SlackReport(ReportingModule):
         ### PDF
             HTML(file_obj=response.content).write_pdf('/tmp/test.pdf')
             report = {
-              'file': '/tmp/test.pdf'
+              'file': open('/tmp/test.pdf','rb')
               }
 
             payload={

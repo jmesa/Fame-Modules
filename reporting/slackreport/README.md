@@ -11,6 +11,7 @@ It was based on previous slack module https://github.com/certsocietegenerale/fam
 - slack legacy token
 - channel(s)
 - FAME API key
+- weasyprint for PDF reporting
 
 ## Configuration
 
