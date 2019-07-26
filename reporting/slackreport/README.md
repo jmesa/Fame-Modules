@@ -1,20 +1,26 @@
-This module send a full HTML report of the last analysis to the selected slack channel (or channels). Useful if you have isolated teams with no access to the malware lab.
+This module send a full PDF / HTML report of the last analysis to the selected Slack channel. Useful if you have isolated teams with no access to the malware lab.
 
-- Preliminary poryx support.
-- PDF report, instead of HTML based.
+![SlackReport](slackreport_message.png)
 
-It was based on previous slack module https://github.com/certsocietegenerale/fame_modules/blob/master/reporting/slack.py
+## Features
+
+- PDF / HTML report.
+- Privacy in communications via compressed reports with password.
 
 ## Requeriments
 
-- requests
-- slack legacy token
-- channel(s)
+- Requests library
+- Slack legacy token
 - FAME API key
-- weasyprint for PDF reporting
+- For PDF reporting, legacy version of weasyprint 0.42.3 (last version with Python 2 support)
+- 7z for compressed reports (usually, allready installed with FAME)
+
+## TODO
+
+- Preliminary proxy support.
 
 ## Configuration
 
-- For localhost instances, please use localhost:port
+- Example configuration
 
-	> http://localhost:4200
+![Config](slackreport_config.png)
