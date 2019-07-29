@@ -31,16 +31,16 @@ except ImportError:
     HAVE_DEFANG = False
 
 
-class SlackReport(ReportingModule):
+class MailReport(ReportingModule):
 
-    name = "slack_report"
-    description = "Post report on Slack when an anlysis if finished."
+    name = "mail_report"
+    description = "Mail report when an anlysis is finished."
 
     config = [
         {
-            'name': 'channel',
+            'name': 'email',
             'type': 'str',
-            'description': 'Slack channel(s) to share the report'
+            'description': 'Mail account to send the report'
         },
         {
             'name': 'legacy_token',
@@ -83,26 +83,12 @@ class SlackReport(ReportingModule):
         },
     ]
 
-    ### slackreport methods ###
+    ### plugin methods ###
 
-    def slackupload(self, object2upload, object_type, analysis):
+    def sendmail():
 
-        report = {'file': open(object2upload,'rb')}
+        print(">>> Report {0} sent to {1}").format(analysis['_id'],self.email)
 
-        payload={
-          "title":"{0}_report.{1}".format(analysis['_id'],object_type),
-          "initial_comment": "Report of {0}\n<{1}/analyses/{2}|See the analysis on FAME>".format(
-            defang(', '.join(analysis._file['names'])),
-            self.fame_base_url,
-            analysis['_id']
-            ),
-          "token":self.legacy_token, 
-          "channels":self.channel, 
-        }
-
-        r = requests.post("https://slack.com/api/files.upload", params=payload, files=report)
-
-        print(">>> Report {0} sent to Slack").format(analysis['_id'])
 
     def htmlreport(self, analysis):
         url_analysis = "{0}/analyses/{1}".format(self.fame_base_url, analysis['_id'])        
@@ -130,7 +116,7 @@ class SlackReport(ReportingModule):
         subprocess.call(["7z", "a", "-tzip", "-p{0}".format(self.password), archive_file, archive])
         return archive_file        
 
-    ### /slackreport methods ###
+    ### /plugin methods ###
 
     def initialize(self):
         if ReportingModule.initialize(self):
@@ -165,11 +151,11 @@ class SlackReport(ReportingModule):
             if self.zip_enabled:
 
                 archive_file = self.compress(pdf_file, analysis)
-                self.slackupload(archive_file, 'zip', analysis)
+                self.sendmail(archive_file, analysis)
                 remove(archive_file)
 
             else:
-                self.slackupload(pdf_file,'pdf',analysis)
+                self.sendmail(pdf_file, analysis)
 
             remove(pdf_file)
         
@@ -179,10 +165,10 @@ class SlackReport(ReportingModule):
             if self.zip_enabled:
 
                 archive_file = self.compress(html_file, analysis)
-                self.slackupload(archive_file,'zip',analysis)
+                self.sendmail(archive_file, analysis)
                 remove(archive_file)
 
             else:
-                self.slackupload(html_file,'html',analysis)
+                self.sendmail(html_file, analysis)
             
         remove(html_file)
