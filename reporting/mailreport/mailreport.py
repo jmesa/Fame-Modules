@@ -80,7 +80,7 @@ class MailReport(ReportingModule):
 
     ### plugin methods ###
 
-    def sendmail():
+    def sendmail(self, attachment, analysis):
 
         print(">>> Report {0} sent to {1}").format(analysis['_id'],self.email)
 
