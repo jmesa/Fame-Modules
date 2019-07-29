@@ -45,7 +45,7 @@ class SlackReport(ReportingModule):
         {
             'name': 'legacy_token',
             'type': 'str',
-            'description': 'Legacy Token'
+            'description': 'Slack API legacy Token'
         },        
         {
             'name': 'fame_base_url',

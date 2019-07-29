@@ -41,12 +41,7 @@ class MailReport(ReportingModule):
             'name': 'email',
             'type': 'str',
             'description': 'Mail account to send the report'
-        },
-        {
-            'name': 'legacy_token',
-            'type': 'str',
-            'description': 'Legacy Token'
-        },        
+        },      
         {
             'name': 'fame_base_url',
             'type': 'str',
