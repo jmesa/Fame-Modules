@@ -8,9 +8,12 @@ from fame.core.module import ReportingModule
 
 import subprocess
 from os import path, remove
+
 from distutils.spawn import find_executable
 
 from fame.common.config import fame_config
+from fame.common.email_utils import EmailMixin, EmailServer
+
 
 try:
     import requests
@@ -41,7 +44,24 @@ class MailReport(ReportingModule):
             'name': 'email',
             'type': 'str',
             'description': 'Mail account to send the report'
-        },      
+        },
+        {
+            'name': 'sender',
+            'type': 'str',
+            'description': 'Sender email visible in the report'
+        },
+        {
+            'name': 'subject',
+            'type': 'str',
+            'default': '[FAME] Report of {0} analysis',            
+            'description': 'Email subject'
+        },          
+        {
+            'name': 'mailbody',
+            'type': 'str',
+            'default': 'Report of {0} analysis is attached',
+            'description': 'Email content'
+        },
         {
             'name': 'fame_base_url',
             'type': 'str',
@@ -80,13 +100,20 @@ class MailReport(ReportingModule):
 
     ### plugin methods ###
 
+
     def sendmail(self, attachment, analysis):
+
+        server = EmailServer()
+
+        msg = server.new_message(self.subject.format(analysis['_id']), self.mailbody.format(analysis['_id']))
+        msg.add_attachment(attachment)
+        msg.send([self.email])        
 
         print(">>> Report {0} sent to {1}").format(analysis['_id'],self.email)
 
 
     def htmlreport(self, analysis):
-        url_analysis = "{0}/analyses/{1}".format(self.fame_base_url, analysis['_id'])        
+        url_analysis = "{0}/analyses/{1}".format(self.fame_base_url, analysis['_id'])
         response = requests.get(url_analysis, stream=True, headers={'Accept': "text/html", 'X-API-KEY': self.fame_api_key})
 
         html_name = "report_{0}.html".format(analysis['_id'])
