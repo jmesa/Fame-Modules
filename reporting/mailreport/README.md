@@ -20,6 +20,11 @@ This module send a full PDF / HTML report of the last analysis to the selected e
 
 - Preliminary proxy support.
 
+## PROBLEMS?
+
+- If you encountered problems with attachments or text body (MIME related), check this issue:
+https://github.com/certsocietegenerale/fame/pull/69
+
 ## Configuration
 
 - Example configuration
