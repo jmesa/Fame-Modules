@@ -61,6 +61,7 @@ class SlackReport(ReportingModule):
         {
             'name': 'proxy',
             'type': 'str',
+            'default': '',
             'description': 'If you are behind a proxy, please provide it'
         },
         {

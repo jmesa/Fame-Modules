@@ -25,6 +25,15 @@ This module send a full PDF / HTML report of the last analysis to the selected e
 - If you encountered problems with attachments or text body (MIME related), check this issue:
 https://github.com/certsocietegenerale/fame/pull/69
 
+- If you are behind a proxy, configure /etc/environment and add your FAME IP to "no_proxy"
+```
+http_proxy="http://PROXY:PORT"
+HTTP_PROXY="http://PROXY:PORT"
+https_proxy="https://PROXY:PORT"
+HTTPS_PROXY="https://PROXY:PORT"
+no_proxy="localhost,127.0.0.1,FAME_IP"
+```
+
 ## Configuration
 
 - Example configuration
