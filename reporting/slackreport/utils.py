@@ -1,25 +1,21 @@
-def insertfile(infile, outfile, line):
-	f1 = open(infile,"r")
-	data = f1.read()	
-	f2 = open(outfile, 'rw+')
-	temp = f2.readlines()
-
-	f2.seek(0)
-	f2.truncate()
+def insertfile(infile, outfile, line, analysis):
+	data = open(infile,"r").read()	
+	temp = open(outfile, 'r').readlines()
 	temp.insert(line,data)
-
+	f2 = open(outfile, "w")
 	f2.write(''.join(temp))
+	f2.close()
 
-def fileline(report,css):
+	print(">>> HTML Report modified").format(analysis['_id'])
+
+def fileline(report, css, analysis):
 	linecounter = 0
 
 	with open(report, 'r+') as fh:
 		for line in fh:
 			linecounter += 1
-			if line.startswith('<head>'):
-				print(line)
-				print(linecounter)				
+			if line.startswith('<head>'):		
 				break
 
-	insertfile(css,report,linecounter)
+	insertfile(css, report, linecounter, analysis)
 

@@ -2,7 +2,7 @@
 
 This module send a full PDF / HTML report of the last analysis to the selected Slack channel. Useful if you have isolated teams with no access to the malware lab.
 
-![SlackReport](slackreport_message.png)
+![SlackReport](img/slackreport_message.png)
 
 ## Features
 
@@ -48,7 +48,7 @@ no_proxy="localhost,127.0.0.1,FAME_IP"
 
 - Example configuration
 
-![Config](slackreport_config.png)
+![Config](img/slackreport_config.png)
 
 ## TODO
 
