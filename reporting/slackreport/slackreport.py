@@ -1,5 +1,7 @@
 from __future__ import unicode_literals
 import json
+import utils
+
 
 from fame.common.exceptions import ModuleInitializationError
 from fame.common.exceptions import ModuleExecutionError
@@ -115,6 +117,8 @@ class SlackReport(ReportingModule):
         with open(html_file, mode='wb') as file:
             file.write(response.content)
 
+        css = 'report.css'
+        fileline(html_file,css)
         print(">>> HTML Report {0} generated").format(analysis['_id'])
         return html_file
 
