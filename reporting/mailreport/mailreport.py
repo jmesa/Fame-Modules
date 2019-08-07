@@ -1,5 +1,8 @@
 from __future__ import unicode_literals
 import json
+import os
+
+from utils import fileline, insertfile
 
 from fame.common.exceptions import ModuleInitializationError
 from fame.common.exceptions import ModuleExecutionError
@@ -8,12 +11,11 @@ from fame.core.module import ReportingModule
 
 import subprocess
 from os import path, remove
-
 from distutils.spawn import find_executable
 
 from fame.common.config import fame_config
-from fame.common.email_utils import EmailMixin, EmailServer
 
+from fame.common.email_utils import EmailMixin, EmailServer
 
 try:
     import requests
@@ -114,7 +116,7 @@ class MailReport(ReportingModule):
 
 
     def htmlreport(self, analysis):
-        url_analysis = "{0}/analyses/{1}".format(self.fame_base_url, analysis['_id'])
+        url_analysis = "{0}/analyses/{1}".format(self.fame_base_url, analysis['_id'])        
         response = requests.get(url_analysis, stream=True, headers={'Accept': "text/html", 'X-API-KEY': self.fame_api_key})
 
         html_name = "report_{0}.html".format(analysis['_id'])
@@ -123,6 +125,10 @@ class MailReport(ReportingModule):
         with open(html_file, mode='wb') as file:
             file.write(response.content)
 
+        environmentPath = os.path.dirname(os.path.abspath(__file__))
+        css = os.path.join(environmentPath, 'styles/report.css')
+        
+        fileline(html_file, css, analysis)
         print(">>> HTML Report {0} generated").format(analysis['_id'])
         return html_file
 

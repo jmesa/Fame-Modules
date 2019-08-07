@@ -2,11 +2,12 @@
 
 This module send a full PDF / HTML report of the last analysis to the selected email account. Useful if you have isolated teams with no access to the malware lab.
 
-![MailReport](mailreport_message.png)
+![MailReport](img/mailreport_message.png)
 
 ## Features
 
 - PDF / HTML report.
+- External CSS for easy personalization of the report.
 - Privacy in communications via compressed reports with password.
 
 ## Requeriments
@@ -41,7 +42,7 @@ no_proxy="localhost,127.0.0.1,FAME_IP"
 
 - Example configuration
 
-![MailReport](mailreport_config.png)
+![MailReport](img/mailreport_config.png)
 
 ## TODO
 

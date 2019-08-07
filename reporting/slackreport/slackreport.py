@@ -87,7 +87,7 @@ class SlackReport(ReportingModule):
         },
     ]
 
-    ### slackreport methods ###
+    ### plugin methods ###
 
     def slackupload(self, object2upload, object_type, analysis):
 
@@ -138,7 +138,7 @@ class SlackReport(ReportingModule):
         subprocess.call(["7z", "a", "-tzip", "-p{0}".format(self.password), archive_file, archive])
         return archive_file        
 
-    ### /slackreport methods ###
+    ### /plugin methods ###
 
     def initialize(self):
         if ReportingModule.initialize(self):
