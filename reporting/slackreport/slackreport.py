@@ -43,8 +43,7 @@ class SlackReport(ReportingModule):
         {
             'name': 'channels',
             'type': 'str',
-            'default': 'CXYXZZZZ,CXYXWWWW',
-            'description': 'Slack channel(s) to share the report, separated by commas'
+            'description': 'Slack channel(s) to share the report, separated by commas. Ex: CXYXZZZZ,CXYXWWWW'
         },
         {
             'name': 'legacy_token',
@@ -54,8 +53,7 @@ class SlackReport(ReportingModule):
         {
             'name': 'fame_base_url',
             'type': 'str',
-            'default': 'http://localhost:4200',
-            'description': 'Base URL:PORT of your FAME instance, as you want it to appear in links.'
+            'description': 'Base URL:PORT of your FAME instance, as you want it to appear in links. Ex: http://localhost:4200'
         },
         {
             'name': 'fame_api_key',

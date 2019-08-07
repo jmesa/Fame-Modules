@@ -45,8 +45,7 @@ class MailReport(ReportingModule):
         {
             'name': 'emails',
             'type': 'str',
-            'default': 'johndoe@domain.com,csirt@csirt.world',
-            'description': 'Mails accounts to send the report, separated by commas'
+            'description': 'Mails accounts to send the report, separated by commas. Ex: johndoe@domain.com,csirt@csirt.world'
         },
         {
             'name': 'sender',
@@ -68,8 +67,7 @@ class MailReport(ReportingModule):
         {
             'name': 'fame_base_url',
             'type': 'str',
-            'default': 'http://localhost:4200',
-            'description': 'Base URL:PORT of your FAME instance, as you want it to appear in links.'
+            'description': 'Base URL:PORT of your FAME instance, as you want it to appear in links. Ex: http://localhost:4200'
         },
         {
             'name': 'fame_api_key',
