@@ -43,9 +43,10 @@ class MailReport(ReportingModule):
 
     config = [
         {
-            'name': 'email',
+            'name': 'emails',
             'type': 'str',
-            'description': 'Mail account to send the report'
+            'default': 'johndoe@domain.com,csirt@csirt.world',
+            'description': 'Mails accounts to send the report, separated by commas'
         },
         {
             'name': 'sender',
@@ -110,9 +111,9 @@ class MailReport(ReportingModule):
 
         msg = server.new_message(self.subject.format(analysis['_id']), self.mailbody.format(analysis['_id']))
         msg.add_attachment(attachment)
-        msg.send([self.email])        
+        msg.send([self.emails])        
 
-        print(">>> Report {0} sent to {1}").format(analysis['_id'],self.email)
+        print(">>> Report {0} sent to {1}").format(analysis['_id'],[self.emails])
 
 
     def htmlreport(self, analysis):

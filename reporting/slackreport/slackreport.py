@@ -41,9 +41,10 @@ class SlackReport(ReportingModule):
 
     config = [
         {
-            'name': 'channel',
+            'name': 'channels',
             'type': 'str',
-            'description': 'Slack channel(s) to share the report'
+            'default': 'CXYXZZZZ,CXYXWWWW',
+            'description': 'Slack channel(s) to share the report, separated by commas'
         },
         {
             'name': 'legacy_token',
@@ -100,8 +101,8 @@ class SlackReport(ReportingModule):
             self.fame_base_url,
             analysis['_id']
             ),
-          "token":self.legacy_token, 
-          "channels":self.channel, 
+          "token": self.legacy_token, 
+          "channels": [self.channels], 
         }
 
         r = requests.post("https://slack.com/api/files.upload", params=payload, files=report)
