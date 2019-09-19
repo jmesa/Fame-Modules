@@ -10,7 +10,7 @@ This module send a full PDF / HTML report of the last analysis to the selected S
 - External CSS for easy personalization of the report.
 - Privacy in communications via compressed reports with password.
 
-## Requeriments
+## Requirements
 
 - Requests library
 - FAME API key
