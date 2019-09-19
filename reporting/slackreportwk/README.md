@@ -6,7 +6,7 @@ This module send a full PDF report with images of the last analysis to the selec
 
 ## Features
 
-- Full PDF report of the FAME report with images and styles.
+- Full PDF report from FAME with original images and styles.
 - Privacy in communications via compressed reports with password.
 
 ## Requirements
