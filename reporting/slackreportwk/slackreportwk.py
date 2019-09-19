@@ -136,12 +136,12 @@ class SlackReportWK(ReportingModule):
                 ('Accept-Encoding', 'gzip'),
                 ('X-API-KEY', self.fame_api_key)
                 ],
+            'custom-header-propagation': True,
             'no-outline': None,
         }
 
         pdfkit.from_url(url_analysis, pdf_file, options=options)
 
-        print("{0} \n {1}").format(url_analysis, pdf_file)
         print(">>> PDF Report {0} generated").format(analysis['_id'])
         return pdf_file
 
