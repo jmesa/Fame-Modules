@@ -83,7 +83,13 @@ class SlackReportWK(ReportingModule):
             'type': 'str',
             'default': 'A4',
             'description': 'Page size for the PDF'
-        },        
+        },
+        {
+            'name': 'orientation',
+            'type': 'str',
+            'default': 'Landscape',
+            'description': 'PDF orientation: Landscape or Portrait'
+        }, 
     ]
 
     ### plugin methods ###
@@ -112,22 +118,6 @@ class SlackReportWK(ReportingModule):
 
         pdf_name = "report_{0}.pdf".format(analysis['_id'])
         pdf_file = path.join(fame_config.temp_path, pdf_name)
-        '''
-        #WK
-        fame_session = ''
-        
-        options = {
-            'page-size': self.pagesize,
-            'encoding': "UTF-8",
-            'custom-header' : [
-                ('Accept-Encoding', 'gzip')
-                ],
-            'cookie': [
-                ('session', fame_session)
-                ],
-            'no-outline': None,
-        }
-        '''
 
         options = {
             'page-size': self.pagesize,
@@ -136,7 +126,8 @@ class SlackReportWK(ReportingModule):
                 ('Accept-Encoding', 'gzip'),
                 ('X-API-KEY', self.fame_api_key)
                 ],
-            'custom-header-propagation': True,
+            'custom-header-propagation': None,
+            'orientation': self.orientation,
             'no-outline': None,
         }
 
