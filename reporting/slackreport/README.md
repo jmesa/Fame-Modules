@@ -15,8 +15,6 @@ This module send a full PDF / HTML report of the last analysis to the selected S
 - Requests library
 - FAME API key
 - For PDF reporting, legacy version of weasyprint 0.42.3 (last version with Python 2 support).
-Install Weasyprint system dependencies previously:
-https://weasyprint.readthedocs.io/en/latest/install.html#linux
 - 7z for compressed reports (allready installed with FAME). If not use:
 ```
 sudo apt-get install p7zip-full
@@ -43,6 +41,14 @@ https_proxy="https://PROXY:PORT"
 HTTPS_PROXY="https://PROXY:PORT"
 no_proxy="localhost,127.0.0.1,FAME_IP"
 
+```
+- "dlopen() failed to load a library: cairo / cairo-2" error. Install necesary Weasyprint dependencies:
+```
+https://weasyprint.readthedocs.io/en/latest/install.html#linux
+```
+Example for Ubuntu 18:
+```
+sudo apt-get install build-essential python3-dev python3-pip python3-setuptools python3-wheel python3-cffi libcairo2 libpango-1.0-0 libpangocairo-1.0-0 libgdk-pixbuf2.0-0 libffi-dev shared-mime-info
 ```
 
 ## Configuration
